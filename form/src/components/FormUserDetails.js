@@ -9,7 +9,10 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import './FormUserDetails.scss';
-
+// TODO: 
+// 1.Raplace all MUI3 to 4
+// 2.Add global styles
+// 3.Move some parts into separate components.
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
