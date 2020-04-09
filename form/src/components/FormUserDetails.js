@@ -22,22 +22,23 @@ function FormUserDetails({
           hintText = "Enter Your First Name"
           floatingLabelText = "First Name"
           name = "firstName"
-          onChange = {handleChange('firstName')}
+          onChange = {handleChange}
           defaultValue={info.firstName}
         />
         <br />
         <TextField 
           hintText = "Enter Your Last Name"
           floatingLabelText = "Last Name"
-          
-          onChange = {handleChange('lastName')}
+          name = "lastName"
+          onChange = {handleChange}
           defaultValue={info.lastName}
         />
         <br />
         <TextField 
           hintText = "Enter Your Email"
           floatingLabelText = "Email"
-          onChange = {handleChange('email')}
+          name = 'email'
+          onChange = {handleChange}
           defaultValue={info.email}
         />
         <br/>

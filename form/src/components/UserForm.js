@@ -21,10 +21,10 @@ const UserForm = () => {
     setStep(step - 1);
   }
 
-  const handleChange = input => e =>{
+  const handleChange = e =>{
     setInfo({
         ...info,
-       [input]: e.target.value
+       [e.target.name]: e.target.value
     })
   }
 
