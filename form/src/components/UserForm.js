@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import FormUserDetails from './FormPersonalDetails';
+import FormUserDetails from './FormUserDetails';
 
-function UserForm() {
+const UserForm = () => {
   const [step, setStep] = useState(1);
   const [info, setInfo] = useState({
     firstName: '',
@@ -11,37 +11,51 @@ function UserForm() {
     city: '',
     bio: ''
   })
-  nextStep = () => {
+  const nextStep = () => {
     //const {step} = step;
     setStep(step + 1);
   }
 
-  prevStep = () => {
+  const prevStep = () => {
     //const {step} = step;
     setStep(step - 1);
   }
 
-  handleChange = input => e =>{
-    setInfo(info.input = e.target.value)
+  const handleChange = input => e =>{
+    setInfo({
+        ...info,
+       [input]: e.target.value
+    })
   }
 
-  switch(step){
-    case 1:
-      return (
-        <FormUserDetails
-          nextStep={nextStep}
-          handleChange={handleChange}
-          info={info}
-         />
-      )
-    case 2: 
-      return <h1>Form Personal Details</h1>
-    case 3:
-      return <h1>Confirm</h1>
-    case 4:
-      return <h1>Success</h1>
+  const stepSwitcher = (step) => {
+    switch(step){
+      case 1:
+        return (
+          <FormUserDetails
+            nextStep={nextStep}
+            handleChange={handleChange}
+            info={info}
+           />
+        );
+      case 2: 
+        return( <h1>Form Personal Details</h1>);
+      case 3:
+        return (<h1>Confirm</h1>);
 
+      case 4:
+        return (<h1>Success</h1>);
+
+      default:
+        return 0;
+    }
   }
+
+  return(
+    <div>
+      {stepSwitcher(step)}
+    </div>
+  )
 }
 
 export default UserForm
