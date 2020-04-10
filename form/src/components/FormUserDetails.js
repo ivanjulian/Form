@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from '@material-ui/core/AppBar';
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
@@ -10,7 +9,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import './FormUserDetails.scss';
 // TODO: 
-// 1.Raplace all MUI3 to 4
 // 2.Add global styles
 // 3.Move some parts into separate components.
 const useStyles = makeStyles({
@@ -31,6 +29,9 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
+  },
+  button: { 
+    margin: '5px'
   }
 });
 
@@ -46,7 +47,7 @@ function FormUserDetails({
   const classes = useStyles();
 
   return (
-    <MuiThemeProvider>
+    //<MuiThemeProvider>
       <Fragment>
       
         <AppBar position="static">
@@ -54,7 +55,7 @@ function FormUserDetails({
             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" className="textTest"/*{classes.title}*/>
+            <Typography variant="h6" className=/*"textTest"*/{classes.title}>
               Enter User Details
             </Typography>
           </Toolbar>
@@ -96,10 +97,7 @@ function FormUserDetails({
       </Button>
         </form>
         
-
-      </Fragment>
-    </MuiThemeProvider>
-  )
+      </Fragment>  )
 }
 
 const styles = {
