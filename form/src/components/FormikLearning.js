@@ -23,7 +23,16 @@ const MyTextField = ({ placeholder, ...props }) => {
 }
 
 const validationSchema = yup.object({
-  firstName: yup.string().required().max(10)
+  firstName: yup
+    .string()
+    .required()
+    .max(10),
+  pets: yup.array().of(
+    yup.object({
+      name: yup.string().required()
+    })
+  )
+
 })
 
 
@@ -37,7 +46,7 @@ function FormikLearning() {
           isTall: false,
           cookies: [],
           yougurt: '',
-          pets: [{ type: "cat", name: "jarvis" }]
+          pets: [{ type: "cat", name: "jarvis" , id: '' + Math.random()}]
         }}
         validationSchema={validationSchema}
         // validate={(values) => {
@@ -78,11 +87,19 @@ function FormikLearning() {
             <MyRadio name="yogurt" type="radio" value="apple" label="apple" />
             <MyRadio name="yogurt" type="radio" value="blueberry" label="blueberry" />
             <FieldArray name="pets">
-              {({ arrayHelpers }) => {
+              {arrayHelpers => 
                 <div>
+                  <Button 
+                    onClick={()=>{
+                      arrayHelpers.push({
+                        type: 'frog',
+                        name: '',
+                        id: ''+Math.random()
+                      })
+                  }}>add pet</Button>
                   {values.pets.map((pet, index) => {
                     return (
-                    <div key={pet.name} >
+                    <div key={pet.id} >
                       <MyTextField placeholder="Pet Name" name={`pets.${index}.name`} />
                       <Field name={`pets.${index}.type`} type='select' as={Select}>
                       <MenuItem value="cat">Cat</MenuItem>
@@ -90,10 +107,13 @@ function FormikLearning() {
                       <MenuItem value="frog">Frog</MenuItem>
 
                       </Field>
+                      <Button
+                        onClick={()=> arrayHelpers.remove(index)}
+                      >X</Button>
                     </div>);
                   })}
                 </div>
-              }}
+              }
             </FieldArray>
             <div>
               <Button
