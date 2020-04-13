@@ -1,24 +1,30 @@
 import React from 'react'
 import { Formik, Field, Form, useField, FieldArray } from 'formik';
 import TetxField from '@material-ui/core/TextField';
-import { Button, Checkbox, Radio, FormControlLabel, TextField, Select, MenuItem } from '@material-ui/core';
+import { Button, Checkbox, Radio, FormControlLabel, TextField, Paper, Select, MenuItem, Typography } from '@material-ui/core';
 import * as yup from 'yup';
+import './FormikLearninig.scss'
 
 const MyRadio = ({ label, ...props }) => {
   const [field] = useField(props);
   return <FormControlLabel {...field} control={<Radio />} label={label} />
 }
 
-const MyTextField = ({ placeholder, ...props }) => {
+const MyTextField = ({ inputProps, placeholder, ...props }) => {
   const [field, meta] = useField(props);
   const errorText = meta.error && meta.touched ? meta.error : '';
   return (
-    <TextField
-      placeholder={placeholder}
-      {...field}
-      helperText={errorText}
-      error={!!errorText}
-    />
+    <div className="container">
+      <TextField
+        inputProps={inputProps}
+        className="MyTextField"
+        placeholder={placeholder}
+        {...field}
+        helperText={errorText}
+        error={!!errorText}
+      />
+    </div>
+
   )
 }
 
@@ -27,6 +33,14 @@ const validationSchema = yup.object({
     .string()
     .required()
     .max(10),
+  lastName: yup
+    .string()
+    .required()
+    .max(10),
+  email: yup
+    .string()
+    .required()
+    .email(),
   pets: yup.array().of(
     yup.object({
       name: yup.string().required()
@@ -37,92 +51,107 @@ const validationSchema = yup.object({
 
 
 function FormikLearning() {
+
+  const initialValues = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    isTall: false,
+    cookies: [],
+    yougurt: '',
+    pets: [{ type: "cat", name: "jarvis", id: '' + Math.random() }]
+  }
+
+  const handleSubmit = (data, { setSubmitting }) => {
+    setSubmitting(true);
+    //make async calls
+    console.log('submit', data);
+    setSubmitting(false);
+  }
+
   return (
-    <div>
+    <div >
       <Formik
-        initialValues={{
-          firstName: '',
-          lastName: '',
-          isTall: false,
-          cookies: [],
-          yougurt: '',
-          pets: [{ type: "cat", name: "jarvis" , id: '' + Math.random()}]
-        }}
+        initialValues={initialValues}
         validationSchema={validationSchema}
-        // validate={(values) => {
-        //   const errors = {};
-
-        //   if (values.firstName.includes('bob')) {
-        //     errors.firstName = 'no bob'
-        //   }
-
-        //   return errors;
-        // }}
-        onSubmit={(data, { setSubmitting }) => {
-          setSubmitting(true);
-          //make async calls
-          console.log('submit', data);
-          setSubmitting(false);
-        }}
+        onSubmit={handleSubmit}
       >
         {({ values, errors, isSubmitting }) => (
-          <Form>
-            <div>
-              <MyTextField
-                placeholder="First Name"
-                name="firstName"
-              />
-            </div>
-            <div>
-              <Field placeholder="Last Name" name="lastName" type="input" as={TetxField} />
-            </div>
-            <Field name="isTall" type="checkbox" as={Checkbox} />
-            <div>Cookies: </div>
-            <Field name="cookies" type="checkbox" value="chocolate chip" as={Checkbox} />
-            <Field name="cookies" type="checkbox" value="snickerdoodle" as={Checkbox} />
-            <Field name="cookies" type="checkbox" value="sugar" as={Checkbox} />
+          <Form className="FormikLearning">
+              <Paper className="Paper">
+                <MyTextField
+                  placeholder="First Name"
+                  name="firstName"
+                  inputProps={{
+                    pattern: "[a-zA-Zа-яА-Я]*"
+                  }}
+                /> <br />
+                <MyTextField
+                  placeholder="Last Name"
+                  name="lastName"
+                  inputProps={{
+                    pattern: "[a-zA-Zа-яА-Я]*"
+                  }}
+                /> <br />
+                <MyTextField
+                  placeholder="Email"
+                  name="email"
+                />
+              </Paper>
 
-            <div>Yogurt: </div>
-            <MyRadio name="yogurt" type="radio" value="banana" label="banana" />
-            <MyRadio name="yogurt" type="radio" value="apple" label="apple" />
-            <MyRadio name="yogurt" type="radio" value="blueberry" label="blueberry" />
+
+            {/* <Field name="isTall" type="checkbox" as={Checkbox} /> */}
+
+            <Typography variant="subtitle1">Cookies: </Typography>
+            <div>
+              <Field name="cookies" type="checkbox" value="chocolate chip" as={Checkbox} />
+              <Field name="cookies" type="checkbox" value="snickerdoodle" as={Checkbox} />
+              <Field name="cookies" type="checkbox" value="sugar" as={Checkbox} />
+            </div>
+
+            <Typography variant="subtitle1">Yogurt: </Typography>
+            <div>
+              <MyRadio name="yogurt" type="radio" value="banana" label="banana" />
+              <MyRadio name="yogurt" type="radio" value="apple" label="apple" />
+              <MyRadio name="yogurt" type="radio" value="blueberry" label="blueberry" />
+            </div>
+
             <FieldArray name="pets">
-              {arrayHelpers => 
+              {arrayHelpers =>
                 <div>
-                  <Button 
-                    onClick={()=>{
+                  <Button
+                    onClick={() => {
                       arrayHelpers.push({
                         type: 'frog',
                         name: '',
-                        id: ''+Math.random()
+                        id: '' + Math.random()
                       })
-                  }}>add pet</Button>
+                    }}>add pet</Button>
                   {values.pets.map((pet, index) => {
                     return (
-                    <div key={pet.id} >
-                      <MyTextField placeholder="Pet Name" name={`pets.${index}.name`} />
-                      <Field name={`pets.${index}.type`} type='select' as={Select}>
-                      <MenuItem value="cat">Cat</MenuItem>
-                      <MenuItem value="dog">Dog</MenuItem>
-                      <MenuItem value="frog">Frog</MenuItem>
+                      <div key={pet.id} >
+                        <MyTextField placeholder="Pet Name" name={`pets.${index}.name`} />
+                        <Field name={`pets.${index}.type`} type='select' as={Select}>
+                          <MenuItem value="cat">Cat</MenuItem>
+                          <MenuItem value="dog">Dog</MenuItem>
+                          <MenuItem value="frog">Frog</MenuItem>
 
-                      </Field>
-                      <Button
-                        onClick={()=> arrayHelpers.remove(index)}
-                      >X</Button>
-                    </div>);
+                        </Field>
+                        <Button
+                          onClick={() => arrayHelpers.remove(index)}
+                        >X</Button>
+                      </div>);
                   })}
                 </div>
               }
             </FieldArray>
-            <div>
-              <Button
-                disable={isSubmitting}
-                type="submit"
-              >
-                Submit
+
+            <Button
+              disable={isSubmitting}
+              type="submit"
+            >
+              Submit
               </Button>
-            </div>
 
             <pre>{JSON.stringify(values, null, 2)}</pre>
             <pre>{JSON.stringify(errors, null, 2)}</pre>
