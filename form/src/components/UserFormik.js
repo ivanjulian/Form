@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FormUserDetails from './FormUserDetails';
+import FormikUserDetails from './FormikUserDetails';
 import FormPersonalDetails from './FormPersonalDetails';
 import Confirm from './Confirm';
 import Success from './Success'
@@ -8,10 +8,10 @@ const UserForm = () => {
   const [step, setStep] = useState(1);
   const [info, setInfo] = useState({
     firstName: 'n',
-    lastName: 'f',
-    email: '3',
+    lastName: 'n',
+    email: 'n',
     occupation: '',
-    city: '4',
+    city: '',
     bio: ''
   })
   const nextStep = () => {
@@ -35,7 +35,7 @@ const UserForm = () => {
     switch (step) {
       case 1:
         return (
-          <FormUserDetails
+          <FormikUserDetails
             nextStep={nextStep}
             handleChange={handleChange}
             info={info}
