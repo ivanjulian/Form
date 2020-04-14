@@ -1,12 +1,15 @@
 import React, { Fragment } from 'react'
-import AppBar from '@material-ui/core/AppBar';
-import MenuIcon from '@material-ui/icons/Menu';
-import Button from '@material-ui/core/Button';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import './FormUserDetails.scss';
+
+import MyAppBar from './MyCustomComponents/MyAppBar';
+import { Formik, Form } from 'formik';
+import { Button, Paper } from '@material-ui/core';
+import './FormikLearninig.scss';
+import validationSchema from './validationSchema';
+import MyTextField from './MyCustomComponents/MyTextField'
+
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
@@ -26,12 +29,13 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     alignItems: 'center'
   },
-  button: { 
+  button: {
     margin: '5px'
   }
 });
 
-function FormPersonalDetail({
+
+function FormPersonalDetails({
   nextStep,
   prevStep,
   info,
@@ -49,14 +53,105 @@ function FormPersonalDetail({
 
   const classes = useStyles();
 
+  const handleSubmit = (data, { setSubmitting }) => {
+    setSubmitting(true);
+    //make async calls
+    // console.log('submit', data);
+    setSubmitting(false);
+  }
+  // console.log(handleChange);
+  // console.log(info.email)
+
+
   return (
+    //<MuiThemeProvider>
     <Fragment>
+      <MyAppBar />
+      <Formik
+        initialValues={info}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ values, errors, isSubmitting }) => (
+          <Form className="FormikLearning">
+            <Paper className="Paper">
+              <MyTextField
+                placeholder="Ocupation"
+                label="Ocupation"
+                handleChange={handleChange}
+                //onChange={handleChange}
+                info={info.ocupation}
+                name="ocupation"
+              /> <br />
+              <MyTextField
+                placeholder="City"
+                label="City"
+                handleChange={handleChange}
+                info={info.city}
+                name="city"
+                inputProps={{
+                  pattern: "[a-zA-Zа-яА-Я]*"
+                }}
+              /> <br />
+              <MyTextField
+                placeholder="Bio"
+                label="Bio"
+                handleChange={handleChange}
+                info={info.bio}
+                name="bio"
+              />
+
+
+              {/* <Button
+                disable={isSubmitting}
+                type="submit"
+              >
+                Submit
+              </Button> */}
+              <div>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={prev}
+              >
+                Prev
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={next}
+              >
+                Next
+              </Button>
+              
+              </div>              
+
+            </Paper>
+
+            <pre>{JSON.stringify(values, null, 2)}</pre>
+            <pre>{JSON.stringify(errors, null, 2)}</pre>
+          </Form>
+        )}
+      </Formik>
+    </Fragment>)
+}
+
+const styles = {
+  button: {
+    margin: '50'
+  }
+}
+
+
+
+export default FormPersonalDetails;
+{/* <Fragment>
       <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className=/*"textTest"*/{classes.title}>
+          <Typography variant="h6" className={classes.title}>
             Enter Prsonal Details
             </Typography>
         </Toolbar>
@@ -113,16 +208,4 @@ function FormPersonalDetail({
       </form>
 
 
-    </Fragment>
-  )
-}
-
-const styles = {
-  button: {
-    margin: '50'
-  }
-}
-
-
-
-export default FormPersonalDetail
+    </Fragment> */}

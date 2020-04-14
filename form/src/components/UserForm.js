@@ -9,7 +9,7 @@ const UserForm = () => {
   const [info, setInfo] = useState({
     firstName: 'n',
     lastName: 'f',
-    email: '3',
+    email: '3sdf@gmail.com',
     occupation: '',
     city: '4',
     bio: ''
@@ -24,11 +24,12 @@ const UserForm = () => {
     setStep(step - 1);
   }
 
-  const handleChange = e => {
-    setInfo({
-      ...info,
-      [e.target.name]: e.target.value
-    })
+  const handleChange = data => {
+    // setInfo({
+    //   ...info,
+    //   [e.target.name]: e.target.value
+    // })
+    setInfo(data)
   }
 
   const stepSwitcher = (step) => {
