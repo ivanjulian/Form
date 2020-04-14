@@ -1,49 +1,21 @@
 import React, { Fragment } from 'react'
-
-import { makeStyles } from '@material-ui/core/styles';
-import './FormUserDetails.scss';
-
-import MyAppBar from './MyCustomComponents/MyAppBar';
 import { Formik, Form } from 'formik';
 import { Button, Paper } from '@material-ui/core';
-import './FormikLearninig.scss';
+
 import validationSchema from './validationSchema';
+
+import MyAppBar from './MyCustomComponents/MyAppBar';
 import MyTextField from './MyCustomComponents/MyTextField'
 
-// const useStyles = makeStyles({
-//   root: {
-//     flexGrow: 1,
-//   },
-//   menuButton: {
-//     marginRight: '5px',
-//   },
-//   title: {
-//     flexGrow: 1,
-//   },
-//   textField: {
-//     margin: '5px',
-//     width: '25ch',
-//   },
-//   form: {
-//     display: 'flex',
-//     flexDirection: 'column',
-//     alignItems: 'center'
-//   },
-//   button: {
-//     margin: '5px'
-//   }
-// });
+import './FormikLearninig.scss';
+
+
 
 function FormUserDetails({
   nextStep,
   info,
   handleChange
 }) {
-  // const next = e => {
-  //   e.preventDefault();
-  //   nextStep();
-  // }
-  // const classes = useStyles();
 
   const handleSubmit = (data, { setSubmitting }) => {
     setSubmitting(true);
@@ -57,7 +29,6 @@ function FormUserDetails({
 
 
   return (
-    //<MuiThemeProvider>
     <Fragment>
       <MyAppBar label="User Details" />
 
@@ -105,8 +76,8 @@ function FormUserDetails({
 
               </Paper>
 
-              <pre>{JSON.stringify(values, null, 2)}</pre>
-              <pre>{JSON.stringify(errors, null, 2)}</pre>
+              {/* <pre>{JSON.stringify(values, null, 2)}</pre>
+              <pre>{JSON.stringify(errors, null, 2)}</pre> */}
             </Form>
           )}
         </Formik>
@@ -116,11 +87,6 @@ function FormUserDetails({
   )
 }
 
-const styles = {
-  button: {
-    margin: '50'
-  }
-}
 
 
 export default FormUserDetails;

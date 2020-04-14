@@ -1,40 +1,9 @@
-import React, { Fragment } from 'react'
-
-import { makeStyles } from '@material-ui/core/styles';
+import React, { Fragment } from 'react';
+import { Button, Paper, List, ListItem, ListItemText } from '@material-ui/core';
 
 import MyAppBar from './MyCustomComponents/MyAppBar';
-import { Formik, Form } from 'formik';
-import { Button, Paper, List, ListItem, ListItemText } from '@material-ui/core';
-import './FormikLearninig.scss';
 
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: '5px',
-  },
-  title: {
-    flexGrow: 1,
-  },
-  textField: {
-    margin: '5px',
-    width: '25ch',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  data: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  button: {
-    margin: '5px'
-  }
-});
+import './FormikLearninig.scss';
 
 function Confirm({
   nextStep,
@@ -43,14 +12,16 @@ function Confirm({
 }) {
   const next = e => {
     e.preventDefault();
-    nextStep();
   }
   const prev = e => {
     e.preventDefault();
     prevStep();
   }
 
-  const classes = useStyles();
+  const send = () =>{
+    //Add sending to the Gmail
+    nextStep();
+  }
 
 
   return (
@@ -119,7 +90,7 @@ function Confirm({
             <Button
               variant="contained"
               color="primary"
-              onClick={next}
+              onClick={send}
             >
               Send
             </Button>
@@ -134,4 +105,4 @@ function Confirm({
 
 
 
-export default Confirm
+export default Confirm;
