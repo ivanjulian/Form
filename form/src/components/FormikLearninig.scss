@@ -10,10 +10,34 @@
 }
 
 .container{
-  margin: 10px;  
+  margin: 10px;
 }
 
+.Button{
+  margin: 5px;
+}
+.ListItem{
+  width: 80%;
+  min-width: 200px;
+  text-align: center;
+}
 .Paper{
   width: 30%;
   text-align: center;
+}
+
+.PaperSuccess{
+  width: 30%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.Typography{
+  margin-top: 30px;
+}
+
+.Content{
+  margin-top: 20px;
 }

@@ -36,7 +36,7 @@ const useStyles = makeStyles({
   }
 });
 
-function MyAppBar() {
+function MyAppBar({label}) {
 
   const classes = useStyles();
 
@@ -47,7 +47,7 @@ function MyAppBar() {
         <MenuIcon />
       </IconButton>
       <Typography variant="h6" className=/*"textTest"*/{classes.title}>
-        Enter User Details
+        {label}
         </Typography>
     </Toolbar>
   </AppBar>

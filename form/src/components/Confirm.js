@@ -1,15 +1,11 @@
 import React, { Fragment } from 'react'
-import AppBar from '@material-ui/core/AppBar';
-import MenuIcon from '@material-ui/icons/Menu';
-import Button from '@material-ui/core/Button';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+
 import { makeStyles } from '@material-ui/core/styles';
 
+import MyAppBar from './MyCustomComponents/MyAppBar';
+import { Formik, Form } from 'formik';
+import { Button, Paper, List, ListItem, ListItemText } from '@material-ui/core';
+import './FormikLearninig.scss';
 
 const useStyles = makeStyles({
   root: {
@@ -59,79 +55,77 @@ function Confirm({
 
   return (
     <Fragment>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className=/*"textTest"*/{classes.title}>
-            Confirm Data
-            </Typography>
-        </Toolbar>
-      </AppBar>
-      <div className={classes.data}>
-        <List>
-          <ListItem>
-            <ListItemText
-              primary="First Name"
-              secondary={info.firstName}
-            />
-          </ListItem>
+      <MyAppBar label="Confirm" />
+      <div className="FormikLearning Content">
+        <Paper className="Paper" >
+          <List className="container">
+            <ListItem>
+              <ListItemText
+                secondary="First Name"
+                primary={info.firstName}
+                className="ListItem"
+              />
+            </ListItem>
 
-          <ListItem>
-            <ListItemText
-              primary="Last Name"
-              secondary={info.lastName}
-            />
-          </ListItem>
+            <ListItem>
+              <ListItemText
+                secondary="Last Name"
+                primary={info.lastName}
+                className="ListItem"
+              />
+            </ListItem>
 
-          <ListItem>
-            <ListItemText
-              primary="Email"
-              secondary={info.email}
-            />
-          </ListItem>
+            <ListItem>
+              <ListItemText
+                secondary="Email"
+                primary={info.email}
+                className="ListItem"
+              />
+            </ListItem>
 
-          <ListItem>
-            <ListItemText
-              primary="Occupation"
-              secondary={info.occupation}
-            />
-          </ListItem>
+            <ListItem>
+              <ListItemText
+                secondary="Occupation"
+                primary={info.occupation}
+                className="ListItem"
+              />
+            </ListItem>
 
-          <ListItem>
-            <ListItemText
-              primary="City"
-              secondary={info.city}
-            />
-          </ListItem>
+            <ListItem>
+              <ListItemText
+                secondary="City"
+                primary={info.city}
+                className="ListItem"
+              />
+            </ListItem>
 
-          <ListItem>
-            <ListItemText
-              primary="Bio"
-              secondary={info.bio}
-            />
-          </ListItem>
-        </List>
-        <br />
-        <div>
-          <Button
-            variant="contained"
-            className={classes.button}
-            color="primary"
-            onClick={prev}
-          >
-            Back
-        </Button>
-          <Button
-            variant="contained"
-            className={classes.button}
-            color="primary"
-            onClick={next}
-          >
-            Next
-        </Button>
-        </div>
+            <ListItem>
+              <ListItemText
+                secondary="Bio"
+                primary={info.bio}
+                className="ListItem"
+              />
+            </ListItem>
+          </List>
+          <div className="container">
+            <Button
+              variant="contained"
+              className="Button"
+              color="primary"
+              onClick={prev}
+            >
+              Back
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={next}
+            >
+              Send
+            </Button>
+          </div>
+        </Paper>
+
       </div>
 
     </Fragment>

@@ -10,29 +10,29 @@ import './FormikLearninig.scss';
 import validationSchema from './validationSchema';
 import MyTextField from './MyCustomComponents/MyTextField'
 
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: '5px',
-  },
-  title: {
-    flexGrow: 1,
-  },
-  textField: {
-    margin: '5px',
-    width: '25ch',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  button: {
-    margin: '5px'
-  }
-});
+// const useStyles = makeStyles({
+//   root: {
+//     flexGrow: 1,
+//   },
+//   menuButton: {
+//     marginRight: '5px',
+//   },
+//   title: {
+//     flexGrow: 1,
+//   },
+//   textField: {
+//     margin: '5px',
+//     width: '25ch',
+//   },
+//   form: {
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center'
+//   },
+//   button: {
+//     margin: '5px'
+//   }
+// });
 
 
 function FormPersonalDetails({
@@ -41,22 +41,21 @@ function FormPersonalDetails({
   info,
   handleChange
 }) {
-  const next = e => {
-    e.preventDefault();
-    nextStep();
-  }
 
   const prev = e => {
     e.preventDefault();
     prevStep();
   }
 
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const handleSubmit = (data, { setSubmitting }) => {
     setSubmitting(true);
     //make async calls
-    // console.log('submit', data);
+    console.log('submit', data);
+    handleChange(data);
+    nextStep();
+
     setSubmitting(false);
   }
   // console.log(handleChange);
@@ -66,81 +65,79 @@ function FormPersonalDetails({
   return (
     //<MuiThemeProvider>
     <Fragment>
-      <MyAppBar />
-      <Formik
-        initialValues={info}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ values, errors, isSubmitting }) => (
-          <Form className="FormikLearning">
-            <Paper className="Paper">
-              <MyTextField
-                placeholder="Ocupation"
-                label="Ocupation"
-                handleChange={handleChange}
-                //onChange={handleChange}
-                info={info.ocupation}
-                name="ocupation"
-              /> <br />
-              <MyTextField
-                placeholder="City"
-                label="City"
-                handleChange={handleChange}
-                info={info.city}
-                name="city"
-                inputProps={{
-                  pattern: "[a-zA-Zа-яА-Я]*"
-                }}
-              /> <br />
-              <MyTextField
-                placeholder="Bio"
-                label="Bio"
-                handleChange={handleChange}
-                info={info.bio}
-                name="bio"
-              />
-
-
-              {/* <Button
-                disable={isSubmitting}
-                type="submit"
-              >
-                Submit
-              </Button> */}
-              <div>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={prev}
-              >
-                Prev
+      <MyAppBar label="Personal Details" />
+      <div className="Content">
+        <Formik
+          initialValues={info}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ values, errors, isSubmitting }) => (
+            <Form className="FormikLearning">
+              <Paper className="Paper">
+                <MyTextField
+                  placeholder="Occupation"
+                  label="Occupation"
+                  handleChange={handleChange}
+                  //onChange={handleChange}
+                  info={info.occupation}
+                  name="occupation"
+                /> <br />
+                <MyTextField
+                  placeholder="City"
+                  label="City"
+                  handleChange={handleChange}
+                  info={info.city}
+                  name="city"
+                  inputProps={{
+                    pattern: "[a-zA-Zа-яА-Я -]*"
+                  }}
+                /> <br />
+                <MyTextField
+                  placeholder="Bio"
+                  label="Bio"
+                  handleChange={handleChange}
+                  info={info.bio}
+                  name="bio"
+                />
+                <div className="container">
+                  <Button
+                    className="Button"
+                    variant="contained"
+                    color="primary"
+                    onClick={prev}
+                  >
+                    Prev
+                </Button>
+                  <Button
+                    className="Button"
+                    variant="contained"
+                    color="primary"
+                    disable={isSubmitting}
+                    type="submit"
+                  >
+                    Next
               </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={next}
-              >
-                Next
-              </Button>
-              
-              </div>              
+                </div>
 
-            </Paper>
 
-            <pre>{JSON.stringify(values, null, 2)}</pre>
-            <pre>{JSON.stringify(errors, null, 2)}</pre>
-          </Form>
-        )}
-      </Formik>
+              </Paper>
+
+              <pre>{JSON.stringify(values, null, 2)}</pre>
+              <pre>{JSON.stringify(errors, null, 2)}</pre>
+            </Form>
+          )}
+        </Formik>
+      </div>
+
     </Fragment>)
 }
 
-const styles = {
-  button: {
-    margin: '50'
-  }
-}
+// const styles = {
+//   button: {
+//     margin: '50'
+//   }
+// }
 
 
 

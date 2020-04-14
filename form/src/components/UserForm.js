@@ -3,32 +3,35 @@ import FormUserDetails from './FormUserDetails';
 import FormPersonalDetails from './FormPersonalDetails';
 import Confirm from './Confirm';
 import Success from './Success'
+import './FormUserDetails.scss';
+
+const initialState = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  occupation: '',
+  city: '',
+  bio: ''
+}
 
 const UserForm = () => {
   const [step, setStep] = useState(1);
-  const [info, setInfo] = useState({
-    firstName: 'n',
-    lastName: 'f',
-    email: '3sdf@gmail.com',
-    occupation: '',
-    city: '4',
-    bio: ''
-  })
+  const [info, setInfo] = useState(initialState)
+
   const nextStep = () => {
-    //const {step} = step;
     setStep(step + 1);
   }
 
   const prevStep = () => {
-    //const {step} = step;
     setStep(step - 1);
   }
 
+  const goToStart = () => {
+    setStep(1);
+    setInfo(initialState);
+  }
+
   const handleChange = data => {
-    // setInfo({
-    //   ...info,
-    //   [e.target.name]: e.target.value
-    // })
     setInfo(data)
   }
 
@@ -44,23 +47,25 @@ const UserForm = () => {
         );
       case 2:
         return (
-        <FormPersonalDetails
-          nextStep={nextStep}
-          prevStep={prevStep}
-          handleChange={handleChange}
-          info={info}
-        />);
+          <FormPersonalDetails
+            nextStep={nextStep}
+            prevStep={prevStep}
+            handleChange={handleChange}
+            info={info}
+          />);
       case 3:
         return (
-        <Confirm
-          nextStep={nextStep}
-          prevStep={prevStep}
-          info={info}
-        />);
+          <Confirm
+            nextStep={nextStep}
+            prevStep={prevStep}
+            info={info}
+          />);
 
       case 4:
         return (
-          <Success />
+          <Success
+            goToStart={goToStart}
+          />
         );
 
       default:

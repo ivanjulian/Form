@@ -10,123 +10,110 @@ import './FormikLearninig.scss';
 import validationSchema from './validationSchema';
 import MyTextField from './MyCustomComponents/MyTextField'
 
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: '5px',
-  },
-  title: {
-    flexGrow: 1,
-  },
-  textField: {
-    margin: '5px',
-    width: '25ch',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  button: {
-    margin: '5px'
-  }
-});
+// const useStyles = makeStyles({
+//   root: {
+//     flexGrow: 1,
+//   },
+//   menuButton: {
+//     marginRight: '5px',
+//   },
+//   title: {
+//     flexGrow: 1,
+//   },
+//   textField: {
+//     margin: '5px',
+//     width: '25ch',
+//   },
+//   form: {
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center'
+//   },
+//   button: {
+//     margin: '5px'
+//   }
+// });
 
 function FormUserDetails({
   nextStep,
   info,
   handleChange
 }) {
-  const next = e => {
-    e.preventDefault();
-    nextStep();
-  }
-  const classes = useStyles();
+  // const next = e => {
+  //   e.preventDefault();
+  //   nextStep();
+  // }
+  // const classes = useStyles();
 
-  const handleSubmit = (data,{ setSubmitting }) => {
-    //setSubmitting(true);
+  const handleSubmit = (data, { setSubmitting }) => {
+    setSubmitting(true);
     //make async calls
-    console.log('submit', data);
+    //console.log('submit', data);
     handleChange(data);
     nextStep();
-
-    //setSubmitting(false);
+    setSubmitting(false);
   }
-  // console.log(handleChange);
-  // console.log(info.email)
+
 
 
   return (
     //<MuiThemeProvider>
     <Fragment>
-      <MyAppBar />
-      <Formik
-        initialValues={info}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ values, errors, isSubmitting }) => (
-          <Form className="FormikLearning">
-            <Paper className="Paper">
-              <MyTextField
-                placeholder="First Name"
-                label="First Name"
-                //onChange={handleChange} 
-                //onChange={handleChange}
-                defaultValue={info.firstName}
-                //info={info.firstName}
-                name="firstName"
-                inputProps={{
-                  pattern: "[a-zA-Zа-яА-Я]*"
-                }}
-              /> <br />
-              <MyTextField
-                placeholder="Last Name"
-                label="Last Name"
-                //handleChange={handleChange} 
-                //onChange={handleChange}
-                //info={info.lastName}
-                name="lastName"
-                inputProps={{
-                  pattern: "[a-zA-Zа-яА-Я]*"
-                }}
-              /> <br />
-              <MyTextField
-                placeholder="Email"
-                label="Email"
-                //handleChange={handleChange} 
-                //onChange={handleChange} 
-                //info={info.email}
-                name="email"
-              />
+      <MyAppBar label="User Details" />
 
+      <div className="Content">
+        <Formik
+          initialValues={info}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ values, errors, isSubmitting }) => (
+            <Form className="FormikLearning">
+              <Paper className="Paper">
+                <MyTextField
+                  placeholder="First Name"
+                  label="First Name"
+                  defaultValue={info.firstName}
+                  name="firstName"
+                  inputProps={{
+                    pattern: "[a-zA-Zа-яА-Я -]*"
+                  }}
+                /> <br />
+                <MyTextField
+                  placeholder="Last Name"
+                  label="Last Name"
+                  name="lastName"
+                  inputProps={{
+                    pattern: "[a-zA-Zа-яА-Я -]*"
+                  }}
+                /> <br />
+                <MyTextField
+                  placeholder="Email"
+                  label="Email"
+                  name="email"
+                />
+                <div className="container">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    disable={isSubmitting}
+                    type="submit"
+                  >
+                    Next
+                </Button>
+                </div>
 
-              {/* <Button
-                disable={isSubmitting}
-                type="submit"
-              >
-                Submit
-              </Button> */}
-              <br />
-              <Button
-                variant="contained"
-                color="primary"
-                disable={isSubmitting}
-                type="submit"
-              >
-                Next
-              </Button>
+              </Paper>
 
-            </Paper>
+              <pre>{JSON.stringify(values, null, 2)}</pre>
+              <pre>{JSON.stringify(errors, null, 2)}</pre>
+            </Form>
+          )}
+        </Formik>
+      </div>
 
-            <pre>{JSON.stringify(values, null, 2)}</pre>
-            <pre>{JSON.stringify(errors, null, 2)}</pre>
-          </Form>
-        )}
-      </Formik>
-    </Fragment>)
+    </Fragment>
+  )
 }
 
 const styles = {
