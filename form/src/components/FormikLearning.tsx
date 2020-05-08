@@ -3,13 +3,22 @@ import { Formik, Field, Form, useField, FieldArray } from 'formik';
 import { Button, Checkbox, Radio, FormControlLabel, TextField, Paper, Select, MenuItem, Typography } from '@material-ui/core';
 import * as yup from 'yup';
 import './FormikLearninig.scss'
+interface MyRadioTypes {
+  label: string,
+}
 
-const MyRadio = ({ label, ...props }) => {
+const MyRadio = ({ label, ...props }: MyRadioTypes) => {
   const [field] = useField(props);
   return <FormControlLabel {...field} control={<Radio />} label={label} />
 }
 
-const MyTextField = ({ inputProps, placeholder, ...props }) => {
+interface MyRadioTypes{
+  inputProps: string,
+  placeholder: string,
+
+}
+
+const MyTextField = ({ inputProps, placeholder, ...props }: MyRadioTypes) => {
   const [field, meta] = useField(props);
   const errorText = meta.error && meta.touched ? meta.error : '';
   return (

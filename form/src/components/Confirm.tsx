@@ -5,15 +5,21 @@ import MyAppBar from './MyCustomComponents/MyAppBar';
 
 import './FormikLearninig.scss';
 
+interface ConfirmProps {
+  nextStep: any,
+  prevStep: any,
+  info: any
+}
+
 function Confirm({
   nextStep,
   prevStep,
   info
-}) {
-  const next = e => {
+}: ConfirmProps) {
+  const next = (e: React.FormEvent<HTMLInputElement>): void => {
     e.preventDefault();
   }
-  const prev = e => {
+  const prev = (e: React.FormEvent<HTMLInputElement>): void  => {
     e.preventDefault();
     prevStep();
   }
@@ -83,7 +89,7 @@ function Confirm({
               variant="contained"
               className="Button"
               color="primary"
-              onClick={prev}
+              onClick={e=>prev}
             >
               Back
             </Button>

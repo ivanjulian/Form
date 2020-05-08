@@ -6,21 +6,28 @@ import validationSchema from './validationSchema'
 import './FormikLearninig.scss'
 
 
-function FormikUserDetails({
+interface ConfirmProps {
+  nextStep: any,
+  handleChange: any,
+  info: any
+}
+
+const FormikUserDetails = ({
   nextStep,
   info,
   handleChange
-}) {
+}: ConfirmProps) => {
 
-  const next = e => {
+  const next =(e: React.FormEvent<HTMLInputElement>): void => {
     e.preventDefault();
     nextStep();
   }
   return (
-    <Formik
+    <Formik 
       info={info}
       validationSchema={validationSchema}
-      // onSubmit={handleSubmit}
+      onSubmit={()=>nextStep}
+      initialValues = {()=>0}
     >
       {({ values, errors, isSubmitting }) => (
         <Form className="FormikLearning">
@@ -53,7 +60,7 @@ function FormikUserDetails({
             <Button
               variant="contained"
               color="primary"
-              onClick={next}
+              onClick={(e) => next}
             >
               Next
             </Button>

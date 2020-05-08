@@ -5,7 +5,11 @@ import MyAppBar from './MyCustomComponents/MyAppBar';
 
 import './FormikLearninig.scss';
 
-function Success({goToStart}) {
+interface SuccessTypes{
+  goToStart: void
+}
+
+const Success =({goToStart}: SuccessTypes) => {
 
 
   return (
