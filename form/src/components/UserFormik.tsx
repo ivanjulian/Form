@@ -31,7 +31,7 @@ const UserForm = () => {
     })
   }
 
-  const stepSwitcher = (step) => {
+  const stepSwitcher = (step: number) => {
     switch (step) {
       case 1:
         return (
