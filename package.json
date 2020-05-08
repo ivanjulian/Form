@@ -1,9 +1,5 @@
 {
   "dependencies": {
-<<<<<<< HEAD
     "@types/yup": "^0.28.1"
-=======
-    "google-maps-react": "^2.0.2"
->>>>>>> parent of 2bdc913... Revert "added google map"
   }
 }
