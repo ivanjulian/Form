@@ -24,7 +24,7 @@ const UserForm = () => {
     setStep(step - 1);
   }
 
-  const handleChange = e => {
+  const handleChange = (e: any) => {
     setInfo({
       ...info,
       [e.target.name]: e.target.value
@@ -59,7 +59,8 @@ const UserForm = () => {
 
       case 4:
         return (
-          <Success />
+          // <Success />
+          0
         );
 
       default:

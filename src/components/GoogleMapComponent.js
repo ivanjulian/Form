@@ -34,3 +34,4 @@ function GoogleMapComponent(props) {
 export default GoogleApiWrapper({
   apiKey: (GOOGLE_API_KEY)
 })(GoogleMapComponent)
+

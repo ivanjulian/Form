@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, ReactNode } from 'react'
 import AppBar from '@material-ui/core/AppBar';
 import MenuIcon from '@material-ui/icons/Menu';
 //import Button from '@material-ui/core/Button';
@@ -36,7 +36,7 @@ const useStyles = makeStyles({
   }
 });
 
-function MyAppBar({label}) {
+const MyAppBar:React.FC<any> = ({label}) =>  {
 
   const classes = useStyles();
 

@@ -3,7 +3,7 @@ import {useField } from 'formik';
 import {TextField } from '@material-ui/core';
 import '../FormikLearninig.scss'
 //TODO: try to  transfer this code to FormUserDetails
-const MyTextField = ({ ...props}/* { info, handleChange, label, inputProps, placeholder, ...props } */) => {
+const MyTextField:React.FC<any> = ({ ...props}/* { info, handleChange, label, inputProps, placeholder, ...props } */) => {
   const [field, meta] = useField(props);
   const errorText = meta.error && meta.touched ? meta.error : '';
   return (

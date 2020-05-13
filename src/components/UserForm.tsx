@@ -31,11 +31,11 @@ const UserForm = () => {
     setInfo(initialState);
   }
 
-  const handleChange = data => {
+  const handleChange = (data: any) => {
     setInfo(data)
   }
 
-  const stepSwitcher = (step) => {
+  const stepSwitcher = (step: any) => {
     switch (step) {
       case 1:
         return (

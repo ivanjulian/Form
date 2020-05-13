@@ -1,24 +1,21 @@
-import React from 'react'
-import { Formik, Field, Form, useField, FieldArray } from 'formik';
+import React, { ClassAttributes, TextareaHTMLAttributes } from 'react'
+import { Formik, Field, Form, useField, FieldArray, FieldConfig, FieldHookConfig } from 'formik';
 import { Button, Checkbox, Radio, FormControlLabel, TextField, Paper, Select, MenuItem, Typography } from '@material-ui/core';
 import * as yup from 'yup';
 import './FormikLearninig.scss'
-interface MyRadioTypes {
-  label: string,
-}
+type MyRadioPropsTypes = { label: string } & FieldHookConfig<{}>
 
-const MyRadio = ({ label, ...props }: MyRadioTypes) => {
+const MyRadio: React.FC<MyRadioPropsTypes> = ({ label, ...props }) => {
   const [field] = useField(props);
   return <FormControlLabel {...field} control={<Radio />} label={label} />
 }
 
-interface MyRadioTypes{
-  inputProps: string,
+type MyTextPropsTypes = {
+  inputProps?: {},
   placeholder: string,
+} & FieldHookConfig<{}>
 
-}
-
-const MyTextField = ({ inputProps, placeholder, ...props }: MyRadioTypes) => {
+const MyTextField: React.FC<MyTextPropsTypes> = ({ inputProps, placeholder, ...props }) => {
   const [field, meta] = useField(props);
   const errorText = meta.error && meta.touched ? meta.error : '';
   return (
@@ -61,16 +58,16 @@ const validationSchema = yup.object({
 function FormikLearning() {
 
   const initialValues = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    isTall: false,
-    cookies: [],
-    yougurt: '',
-    pets: [{ type: "cat", name: "jarvis", id: '' + Math.random() }]
+    firstName: '' as string,
+    lastName: '' as string,
+    email: '' as string,
+    isTall: false as boolean,
+    cookies: [] as Array<string>,
+    yougurt: '' as string,
+    pets: [{ type: "cat", name: "jarvis", id: '' + Math.random() }] as Array<{ type: string, name: string, id: string }>
   }
 
-  const handleSubmit = (data, { setSubmitting }) => {
+  const handleSubmit = (data: any, { setSubmitting }: any) => {
     setSubmitting(true);
     //make async calls
     console.log('submit', data);
@@ -86,29 +83,29 @@ function FormikLearning() {
       >
         {({ values, errors, isSubmitting }) => (
           <Form className="FormikLearning">
-              <Paper className="Paper">
-                <MyTextField
-                  placeholder="First Name"
-                  name="firstName"
-                  inputProps={{
-                    pattern: "[a-zA-Zа-яА-Я]*"
-                  }}
-                /> <br />
-                <MyTextField
-                  placeholder="Last Name"
-                  name="lastName"
-                  inputProps={{
-                    pattern: "[a-zA-Zа-яА-Я]*"
-                  }}
-                /> <br />
-                <MyTextField
-                  placeholder="Email"
-                  name="email"
-                />
-              </Paper>
+            <Paper className="Paper">
+              <MyTextField
+                placeholder="First Name"
+                name="firstName"
+                inputProps={{
+                  pattern: "[a-zA-Zа-яА-Я]*"
+                }}
+              /> <br />
+              <MyTextField
+                placeholder="Last Name"
+                name="lastName"
+                inputProps={{
+                  pattern: "[a-zA-Zа-яА-Я]*"
+                }}
+              /> <br />
+              <MyTextField
+                placeholder="Email"
+                name="email"
+              />
+            </Paper>
 
 
-            {/* <Field name="isTall" type="checkbox" as={Checkbox} /> */}
+            <Field name="isTall" type="checkbox" as={Checkbox} />
 
             <Typography variant="subtitle1">Cookies: </Typography>
             <div>
@@ -154,12 +151,15 @@ function FormikLearning() {
               }
             </FieldArray>
 
-            <Button
-              disable={isSubmitting}
-              type="submit"
-            >
-              Submit
+            <div>
+              <Button
+                disabled={isSubmitting}
+                type="submit"
+              >
+                Submit
               </Button>
+            </div>
+
 
             <pre>{JSON.stringify(values, null, 2)}</pre>
             <pre>{JSON.stringify(errors, null, 2)}</pre>
