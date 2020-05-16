@@ -10,21 +10,21 @@ import MyTextField from './MyCustomComponents/MyTextField'
 import './FormikLearninig.scss';
 
 type FormPersonalDetailsPropsType = {
-  nextStep: ()=>void,
-  prevStep: ()=>void,
+  nextStep: () => void,
+  prevStep: () => void,
   info: any,
-  handleChange: (data: any)=> void
+  handleChange: (data: any) => void
 }
 
 type FormPersonalDetailsStateType = {
-  
+
 }
 
 
 type FormPersonalDetailsType = FormPersonalDetailsPropsType & FormPersonalDetailsStateType;
 
 
-const FormPersonalDetails:React.FC<FormPersonalDetailsType> = ({
+const FormPersonalDetails: React.FC<FormPersonalDetailsType> = ({
   nextStep,
   prevStep,
   info,
@@ -37,7 +37,7 @@ const FormPersonalDetails:React.FC<FormPersonalDetailsType> = ({
   }
 
 
-  const handleSubmit = (data: any, { setSubmitting}: any) => {
+  const handleSubmit = (data: any, { setSubmitting }: any) => {
     setSubmitting(true);
     //make async calls
     //console.log('submit', data);
@@ -85,22 +85,20 @@ const FormPersonalDetails:React.FC<FormPersonalDetailsType> = ({
                 />
                 <div className="container">
                   <Button
-                    className="Button"
                     variant="contained"
                     color="primary"
                     onClick={prev}
                   >
                     Prev
-                </Button>
+                  </Button>
                   <Button
-                    className="Button"
                     variant="contained"
                     color="primary"
                     disabled={isSubmitting}
                     type="submit"
                   >
                     Next
-              </Button>
+                  </Button>
                 </div>
 
 

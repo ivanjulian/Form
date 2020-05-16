@@ -1,6 +1,6 @@
 import React, { Fragment, ReactNode } from 'react'
 import AppBar from '@material-ui/core/AppBar';
-import HelpIcon from '@material-ui/icons/Help';
+import Menu from '@material-ui/icons/Menu';
 //import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -59,13 +59,13 @@ const MyAppBar: React.FC<any> = ({ label }) => {
         <FormControlLabel
           control={
             <IconButton edge="start"  color="inherit" aria-label="menu" onClick={handleClickOpen}>
-          🤔
+          <Menu/>
             </IconButton>
           }
           label={null}
         />
 
-        <Typography variant="h6" className=/*"textTest"*/{classes.title}>
+        <Typography variant="h6" className={classes.title}>
           {label}
         </Typography>
           <DetailsWindow  open={open} onClose={handleClickClose} />
