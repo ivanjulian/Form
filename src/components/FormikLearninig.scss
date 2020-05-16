@@ -27,9 +27,8 @@
   text-align: center;
 }
 
-.PaperSuccess{
-  min-width: 300px;
-
+.PaperSuccess, .DetailsWindow{
+  min-width: 400px;
   width: 30%;
   text-align: center;
   display: flex;
@@ -43,4 +42,22 @@
 
 .Content{
   margin-top: 20px;
+}
+
+.linksContainer{
+  width: 100px;
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+}
+
+.MuiDialogTitle-root, .MuiDialogContentText-root{
+  text-align: center;
+}
+
+.btn-container{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
 }
