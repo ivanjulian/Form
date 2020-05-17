@@ -2,7 +2,12 @@ import React from 'react';
 import { Button, Paper, Typography, Link, Dialog, DialogContentText, DialogContent, DialogTitle, DialogActions } from '@material-ui/core';
 import { GitHub, LinkedIn, Instagram } from '@material-ui/icons';
 
-const DetailsWindow = (props)=> {
+type DetailsWindowPropsType = {
+  onClose: () => void,
+  open: boolean
+}
+
+const DetailsWindow:React.FC<any> = (props: DetailsWindowPropsType)=> {
   const { onClose, open } = props;
   return (
     <Dialog onClose={onClose} aria-labelledby="simple-dialog-title" open={open} >
