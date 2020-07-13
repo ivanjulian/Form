@@ -13,6 +13,7 @@ Attention: This project is still in a row, because of this some functionality ma
 </ul>
 
 <h3>Photos of the project</h3>
+
 <img width="500px" src="src/photos_for_github/user-details.png"     alt="user details page">
 <img width="500px" src="src/photos_for_github/personal-details.png" alt="personal details page">
 <img width="500px" src="src/photos_for_github/confirm.png"          alt="confirm page">
