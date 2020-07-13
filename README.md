@@ -18,3 +18,4 @@ Attention: This project is still in a row, because of this some functionality ma
 <img src="public/photos_for_github/confirm.png"          alt="confirm page"  width="500px">
 <img src="public/photos_for_github/success.png"          alt="success page"  width="500px">
 <img src="public/photos_for_github/modal-window.png"     alt="modal window"  width="500px">
+<img src="public/photos_for_github/user-details.png" width="30%">
